@@ -1,0 +1,20 @@
+import math
+
+g = 1/(2*math.pi)**0.5
+f = lambda x: math.e**(-x**2/2)
+def v(z,n=10000):
+    a = 0
+    for i in range(n):
+        a += f(z*i/n)*z/n
+    return a*g
+
+print(' z  |  ' + '  |  '.join(list(map(lambda x:str(x/100),range(10)))).replace('0.0 ','0.00 '))
+print(''.join(list(map(lambda x:'+' if (x-5)%9 == 8 else '-', range(94)))))
+for i in range(35):
+    r = str(i/10)
+    for j in range(10):
+        w = i/10 + j/100
+        t = str(math.floor(v(w)*10000)/10000)
+        r += ' |  ' + (t + '0'*(6-len(t))).replace('0.','.')
+    print(r)
+print(''.join(list(map(lambda x:'-' if (x-5)%8 == 7 else '-', range(84)))))
